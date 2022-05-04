@@ -1,6 +1,6 @@
 import { ChevronDownIcon } from "@heroicons/react/outline";
 import { useSession } from "next-auth/react";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 const colors = [
   "from-indigo-500",
   "from-blue-500",
@@ -13,7 +13,17 @@ const colors = [
 
 const Center = () => {
   const { data: session } = useSession();
-  useEffect(() => {}, []);
+  const [color, setColor] = useState(null);
+
+  useEffect(() => {
+    function changeColor() {
+      const idx = Math.floor(Math.random() * colors.length);
+      const currColor = colors[idx];
+      setColor(currColor);
+    }
+    return changeColor;
+  }, []);
+
   return (
     <div className="flex-grow text-white ">
       <header className="absolute top-5 right-8">
@@ -29,7 +39,7 @@ const Center = () => {
       </header>
 
       <section
-        className={`flex items-end space-x-7 bg-gradient-to-b to-black from-red-500 h-80 text-white p-8`}
+        className={`flex items-end space-x-7 bg-gradient-to-b to-black ${color} h-80 text-white p-8`}
       ></section>
     </div>
   );
