@@ -2,10 +2,10 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 ## Environment Variables
 
+NEXTAUTH_URL
+
 NEXT_PUBLIC_CLIENT_ID
 
 NEXT_PUBLIC_CLIENT_SECRET
 
 JWT_SECRET
-
-

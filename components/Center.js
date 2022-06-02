@@ -34,11 +34,10 @@ const Center = () => {
       .catch((error) => console.error(error));
   }, [spotifyApi, playlistId]);
 
-  console.log(playlist);
   return (
     <div className="flex-grow text-white ">
       <header className="absolute top-5 right-8">
-        <div className="flex items-center space-x-3 bg-black opacity-90 hover:opacity-80 cursor-pointer rounded-full p-1 pr-2">
+        <div className="flex items-center space-x-3 bg-black opacity-90 hover:opacity-80 cursor-pointer rounded-full p-1 pr-2 text-white">
           <img
             className="rounded-full w-10 h-10"
             src={session?.user?.image}
