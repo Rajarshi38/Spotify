@@ -6,6 +6,7 @@ import { shuffle } from "lodash";
 import { playlistIdState, playlistState } from "../atoms/playlistAtom";
 import useSpotify from "../hooks/useSpotify";
 import Songs from "./Songs";
+import { PlayIcon } from "@heroicons/react/solid";
 const colors = [
   "from-indigo-500",
   "from-blue-500",
@@ -59,6 +60,7 @@ const Center = () => {
           className="h-44 w-44 shadow-2xl"
           src={playlist?.images?.[0].url}
         ></img>
+
         <div>
           <p>PLAYLIST</p>
           <h1 className="text-2xl md:text-3xl xl:text-5xl font-bold">

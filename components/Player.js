@@ -48,10 +48,16 @@ const Player = () => {
 
   const skipPrevious = () => {
     spotifyApi.skipToPrevious();
+    spotifyApi.getMyCurrentPlayingTrack().then((data) => {
+      setCurrentTrackId(data.body?.item.id);
+    });
   };
 
   const skipNext = () => {
     spotifyApi.skipToNext();
+    spotifyApi.getMyCurrentPlayingTrack().then((data) => {
+      setCurrentTrackId(data.body?.item.id);
+    });
   };
 
   const debouncedAdjustVolume = useCallback(
