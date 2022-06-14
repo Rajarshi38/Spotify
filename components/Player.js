@@ -26,11 +26,28 @@ const Player = () => {
 
   const fetchCurrentSong = () => {
     if (!songInfo) {
+      spotifyApi.getMyRecentlyPlayedTracks().then((data) => console.log(data));
       spotifyApi.getMyCurrentPlayingTrack().then((data) => {
         setCurrentTrackId(data.body?.item.id);
         spotifyApi.getMyCurrentPlaybackState().then((data) => {
           setIsPlaying(data.body?.is_playing);
         });
+      });
+    }
+  };
+
+  /**
+   * When no devices of spotify is online the player component show a placeholder of image with no image.
+   * Fetch Recent Song will fill that placeholder but I can not figure out how to use that because if i use that
+   * then When I refresh while a active device is on then the current playing song will be gone.   *
+   * @note current playing song is based on recent minutes active
+   * @note but recent playing song is not like that it gives the list of recently played songs within a timeframe which
+   * is different from current playing song
+   */
+  const fetchRecentSong = () => {
+    if (!songInfo) {
+      spotifyApi.getMyRecentlyPlayedTracks().then((data) => {
+        setCurrentTrackId(data.body?.items[0]?.track.id);
       });
     }
   };
@@ -46,16 +63,16 @@ const Player = () => {
     });
   };
 
-  const skipPrevious = () => {
-    spotifyApi.skipToPrevious();
-    spotifyApi.getMyCurrentPlayingTrack().then((data) => {
+  const skipPrevious = async () => {
+    await spotifyApi.skipToPrevious();
+    await spotifyApi.getMyCurrentPlayingTrack().then((data) => {
       setCurrentTrackId(data.body?.item.id);
     });
   };
 
-  const skipNext = () => {
-    spotifyApi.skipToNext();
-    spotifyApi.getMyCurrentPlayingTrack().then((data) => {
+  const skipNext = async () => {
+    await spotifyApi.skipToNext();
+    await spotifyApi.getMyCurrentPlayingTrack().then((data) => {
       setCurrentTrackId(data.body?.item.id);
     });
   };

@@ -6,7 +6,7 @@ import { shuffle } from "lodash";
 import { playlistIdState, playlistState } from "../atoms/playlistAtom";
 import useSpotify from "../hooks/useSpotify";
 import Songs from "./Songs";
-import { PlayIcon } from "@heroicons/react/solid";
+import { PlayIcon, HeartIcon } from "@heroicons/react/solid";
 const colors = [
   "from-indigo-500",
   "from-blue-500",
@@ -35,6 +35,12 @@ const Center = () => {
       })
       .catch((error) => console.error(error));
   }, [spotifyApi, playlistId]);
+
+  const PlayListPlay = () => {
+    spotifyApi.play({
+      uris: [playlist.uri],
+    });
+  };
 
   return (
     <div className="flex-grow text-white h-screen overflow-y-scroll scrollbar-hide">
@@ -68,6 +74,13 @@ const Center = () => {
           </h1>
         </div>
       </section>
+      <div className="flex px-10 mb-8 space-x-3 items-center">
+        <PlayIcon
+          className="button h-14 w-14 text-green-500"
+          onClick={PlayListPlay}
+        />
+        <HeartIcon className="button h-8 w-8 text-green-500" />
+      </div>
 
       <div>
         <Songs />
